@@ -1,0 +1,34 @@
+name: ID-CASH Agent Flutter CI
+on:
+  pull_request:
+  push:
+    branches:
+      - feature/agent-flutter-onboarding
+permissions:
+  contents: read
+jobs:
+  analyze-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate standard Android scaffolding
+        run: flutter create . --platforms=android --project-name=idcash_agent_app
+      - name: Install exact uploaded ID-CASH artwork
+        run: python3 scripts/install_brand_assets.py --app agent
+      - name: Verify original artwork integrity
+        run: python3 scripts/install_brand_assets.py --app agent --verify-only
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      - name: Generate branded Android launcher icons
+        run: dart run flutter_launcher_icons
+      - name: Analyze
+        run: flutter analyze
+      - name: Run widget tests
+        run: flutter test
+      - name: Build Android debug APK
+        run: flutter build apk --debug
