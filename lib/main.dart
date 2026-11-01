@@ -137,7 +137,7 @@ class AgentWelcomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.storefront_outlined, color: navy, size: 88),
+          Image.asset('assets/images/app_icon.png', height: 120, width: 120, fit: BoxFit.contain, errorBuilder: (_, __, ___) => const Icon(Icons.storefront_outlined, color: navy, size: 88)),
           const SizedBox(height: 22),
           const Text('ID-CASH Agent', style: TextStyle(
             color: navy, fontSize: 34, fontWeight: FontWeight.w800)),
