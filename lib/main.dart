@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'review/agent_review_dashboard.dart';
 
 const navy = Color(0xFF073B67);
 const cyan = Color(0xFF76BED2);
@@ -147,9 +148,18 @@ class AgentWelcomeScreen extends StatelessWidget {
           const Text('Serve customers with secure cardless withdrawals and balance inquiries.',
             textAlign: TextAlign.center),
           const SizedBox(height: 28),
-          const FilledButton(
+          const Text('Agent authentication is not yet connected.',
+            textAlign: TextAlign.center),
+          const SizedBox(height: 14),
+          FilledButton(
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => const AgentReviewDashboard())),
+            child: const Text('Explore Agent App demo'),
+          ),
+          const SizedBox(height: 14),
+          const OutlinedButton(
             onPressed: null,
-            child: Text('Agent sign-in — next integration step'),
+            child: Text('Live agent sign-in — not available yet'),
           ),
         ],
       ),

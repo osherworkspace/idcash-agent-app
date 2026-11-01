@@ -9,7 +9,7 @@ permissions:
 jobs:
   analyze-and-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2
@@ -32,3 +32,10 @@ jobs:
         run: flutter test
       - name: Build Android debug APK
         run: flutter build apk --debug
+      - name: Publish installable Android review APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ID-CASH-Agent-App-Review-APK
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30
